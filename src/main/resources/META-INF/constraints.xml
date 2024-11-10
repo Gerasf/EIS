@@ -1,0 +1,45 @@
+<constraint-mappings xmlns="http://jboss.org/xml/ns/javax/validation/mapping"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="http://jboss.org/xml/ns/javax/validation/mapping/validation-mapping-1.1.xsd"
+                     version="1.1">
+    <bean class="Lab4_Validation.Model.XmlValidatedSettlement" ignore-annotations="false">
+        <field name="name">
+            <constraint annotation="jakarta.validation.constraints.NotNull">
+                <message>Название не должно быть пустым</message>
+            </constraint>
+            <constraint annotation="jakarta.validation.constraints.Pattern">
+                <message>Название должно содержать только буквы и пробелы</message>
+                <element name="regexp">^[A-Za-zА-Яа-яЁё\\s]+$</element>
+            </constraint>
+        </field>
+        <field name="postalCode">
+            <constraint annotation="jakarta.validation.constraints.NotNull">
+                <message>Почтовый индекс не должен быть пустым</message>
+            </constraint>
+            <constraint annotation="jakarta.validation.constraints.Pattern">
+                <message>Почтовый индекс должен состоять из 6 цифр</message>
+                <element name="regexp">^\d{6}$</element>
+            </constraint>
+        </field>
+        <field name="region">
+            <constraint annotation="jakarta.validation.constraints.NotNull">
+                <message>Регион не должен быть пустым</message>
+            </constraint>
+        </field>
+        <field name="country">
+            <constraint annotation="jakarta.validation.constraints.NotNull">
+                <message>Страна не должна быть пустой</message>
+            </constraint>
+        </field>
+        <field name="foundationYear">
+            <constraint annotation="jakarta.validation.constraints.Min">
+                <message>Год основания должен быть не раньше 1000</message>
+                <element name="value">1000</element>
+            </constraint>
+            <constraint annotation="jakarta.validation.constraints.Max">
+                <message>Год основания не может быть больше 2100</message>
+                <element name="value">2100</element>
+            </constraint>
+        </field>
+    </bean>
+</constraint-mappings>
