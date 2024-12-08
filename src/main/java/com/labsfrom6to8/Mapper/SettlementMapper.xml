@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.Mapper.SettlementMapper">
+
+    <insert id="insertSettlement" parameterType="com.example.Model.Settlement">
+        INSERT INTO settlements (name, population, region, is_active)
+        VALUES (#{name}, #{population}, #{region}, #{isActive})
+    </insert>
+
+    <update id="updateSettlement" parameterType="com.example.Model.Settlement">
+        UPDATE settlements
+        SET name = #{name},
+            population = #{population},
+            region = #{region},
+            is_active = #{isActive}
+        WHERE id = #{id}
+    </update>
+
+    <resultMap id="SettlementResultMap" type="com.example.Model.Settlement">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="population" column="population"/>
+        <result property="region" column="region"/>
+        <result property="isActive" column="is_active"/>
+    </resultMap>
+
+    <select id="selectActiveSettlements" resultMap="SettlementResultMap">
+        SELECT * FROM settlements WHERE is_active = TRUE
+    </select>
+
+    <delete id="deleteSettlement" parameterType="Long">
+        DELETE FROM settlements
+        WHERE id = #{id}
+    </delete>
+</mapper>
